@@ -6,3 +6,19 @@ Content-Type: application/json
     "email": "test4@test.com",
     "password": "qwasdasdqwqwe"
 }
+
+
+#### Get  User 
+GET http://localhost:3000/auth/1
+
+#### Delete  User 
+DELETE  http://localhost:3000/auth/4
+
+#### Get All  Users 
+GET http://localhost:3000/auth/
+
+#### Get users by email 
+GET http://localhost:3000/auth/?email=test@test.com
+
+#### Get users by email 
+GET http://localhost:3000/auth/?email=dsdsdsd@test.com
