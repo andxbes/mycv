@@ -7,6 +7,33 @@ Content-Type: application/json
     "password": "qwasdasdqwqwe"
 }
 
+#### Update a User 
+PATCH  http://localhost:3000/auth/1
+Content-Type: application/json
+
+{
+    "email": "test4@test.com",
+    "password": "qwasdasdqwqwe"
+}
+
+
+#### Update a User Email
+PATCH  http://localhost:3000/auth/1
+Content-Type: application/json
+
+{
+    "email": "test4@test.com"
+}
+
+
+#### Update a  User password
+PATCH  http://localhost:3000/auth/1
+Content-Type: application/json
+
+{
+    "password": "qwasdasdqwqwe2"
+}
+
 
 #### Get  User 
 GET http://localhost:3000/auth/1
