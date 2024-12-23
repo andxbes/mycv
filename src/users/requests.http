@@ -3,7 +3,7 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email": "test@test.com",
+    "email": "test3@test.com",
     "password": "qwasdasdqwqwe"
 }
 
@@ -16,6 +16,14 @@ Content-Type: application/json
     "password": "qwasdasdqwqwe"
 }
 
+#### Get current user 
+GET http://localhost:3000/auth/whoami
+
+#### Get current user 
+GET http://localhost:3000/auth/signout
+
+
+
 #### Update a User 
 PATCH  http://localhost:3000/auth/1
 Content-Type: application/json
@@ -25,7 +33,6 @@ Content-Type: application/json
     "password": "qwasdasdqwqwe"
 }
 
-
 #### Update a User Email
 PATCH  http://localhost:3000/auth/2
 Content-Type: application/json
@@ -33,7 +40,6 @@ Content-Type: application/json
 {
     "email": "test4@test.com"
 }
-
 
 #### Update a  User password
 PATCH  http://localhost:3000/auth/100
@@ -61,3 +67,7 @@ GET http://localhost:3000/auth/?email=test2@test.com
 
 #### Get users by email 
 GET http://localhost:3000/auth/?email=dsdsdsd@test.com
+
+
+
+
