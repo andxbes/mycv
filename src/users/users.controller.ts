@@ -9,6 +9,7 @@ import {
   Post,
   Query,
   Session,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserDTO } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
@@ -18,9 +19,11 @@ import { UserDto } from './dtos/user.dto';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { User } from './user.entity';
+import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
 
 @Serialize(UserDto)
 @Controller('auth')
+@UseInterceptors(CurrentUserInterceptor)
 export class UsersController {
   constructor(
     private usersService: UsersService,
