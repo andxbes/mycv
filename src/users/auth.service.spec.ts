@@ -11,10 +11,21 @@ describe('AuthService', () => {
 
   beforeEach(async () => {
     //create a fake copy of the users service
+    const users: User[] = [];
     fakeUsersService = {
-      find: () => Promise.resolve([]),
-      create: (email: string, password: string) =>
-        Promise.resolve({ id: 1, email, password } as User),
+      find: (email: string) => {
+        const filteredUsers = users.filter((user) => user.email === email);
+        return Promise.resolve(filteredUsers);
+      },
+      create: (email: string, password: string) => {
+        const user = {
+          id: Math.floor(Math.random() * 99999),
+          email,
+          password,
+        } as User;
+        users.push(user);
+        return Promise.resolve(user);
+      },
     };
     const module = await Test.createTestingModule({
       providers: [
@@ -65,5 +76,12 @@ describe('AuthService', () => {
     await expect(
       service.signin('laskdjf@alskdfj.com', 'passowrd'),
     ).rejects.toThrow(BadRequestException);
+  });
+
+  it('returns a user if correct password is provider', async () => {
+    await service.signup('asdf2@asdf.com', 'mypassword');
+
+    const user = await service.signin('asdf2@asdf.com', 'mypassword');
+    expect(user).toBeDefined();
   });
 });
