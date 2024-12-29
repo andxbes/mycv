@@ -23,27 +23,11 @@ import { AuthGuard } from '../guards/auth.guard';
 
 @Serialize(UserDto)
 @Controller('auth')
-@UseGuards(AuthGuard)
 export class UsersController {
   constructor(
     private usersService: UsersService,
     private authService: AuthService,
   ) {}
-
-  // @Get('/whoami')
-  // whoAmI(@Session() session: any) {
-  //   return this.usersService.findOne(session.userId);
-  // }
-
-  @Get('/whoami')
-  whoAmI(@CurrentUser() user: User) {
-    return user;
-  }
-
-  @Get('/signout')
-  signOut(@Session() session: any) {
-    session.userId = null;
-  }
 
   @Post('/signup')
   async createUser(@Body() body: CreateUserDTO, @Session() session: any) {
@@ -59,7 +43,20 @@ export class UsersController {
     return user;
   }
 
+  @Get('/signout')
+  @UseGuards(AuthGuard)
+  signOut(@Session() session: any) {
+    session.userId = null;
+  }
+
+  @Get('/whoami')
+  @UseGuards(AuthGuard)
+  whoAmI(@CurrentUser() user: User) {
+    return user;
+  }
+
   @Get('/:id')
+  @UseGuards(AuthGuard)
   async findUser(@Param('id') id: string) {
     const user = await this.usersService.findOne(parseInt(id));
     if (!user) {
@@ -69,16 +66,19 @@ export class UsersController {
   }
 
   @Get()
+  @UseGuards(AuthGuard)
   async findAllUsers(@Query('email') email: string) {
     return await this.usersService.find(email);
   }
 
   @Delete('/:id')
+  @UseGuards(AuthGuard)
   removeUser(@Param('id') id: string) {
     return this.usersService.remove(parseInt(id));
   }
 
   @Patch('/:id')
+  @UseGuards(AuthGuard)
   updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
     return this.usersService.update(parseInt(id), body);
   }
