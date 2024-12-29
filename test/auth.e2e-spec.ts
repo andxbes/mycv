@@ -16,7 +16,7 @@ describe('AppController (e2e)', () => {
   });
 
   it('handles a signup request', () => {
-    const tEmail = 'test101@test.com';
+    const tEmail = 'test@test.com';
     return request(app.getHttpServer())
       .post('/auth/signup')
       .send({ email: tEmail, password: '12345' })
