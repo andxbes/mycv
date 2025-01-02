@@ -1,3 +1,4 @@
+import { Report } from 'src/reports/report.entity';
 import {
   AfterInsert,
   AfterRemove,
@@ -5,6 +6,7 @@ import {
   Column,
   Entity,
   Index,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -31,4 +33,7 @@ export class User {
   logUpdate() {
     console.log('Updated User width id', this.id);
   }
+
+  @OneToMany(() => Report, (report) => report.user)
+  reports: Report[];
 }
