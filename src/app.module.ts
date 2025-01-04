@@ -27,12 +27,6 @@ const cookieSession = require('cookie-session');
         };
       },
     }),
-    // TypeOrmModule.forRoot({
-    //   type: 'sqlite',
-    //   database: process.env.NODE_ENV === 'test' ? 'test.sqlite' : 'db.sqlite',
-    //   entities: [User, Report],
-    //   synchronize: true,
-    // }),
     UsersModule,
     ReportsModule,
   ],
@@ -48,11 +42,13 @@ const cookieSession = require('cookie-session');
   ],
 })
 export class AppModule {
+  constructor(private configService: ConfigService) {}
+
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(
         cookieSession({
-          keys: ['asdfgadsf'],
+          keys: [this.configService.get('COOKIE_KEY')],
         }),
       )
       .forRoutes('*');
