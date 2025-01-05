@@ -9,7 +9,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { APP_PIPE } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 const cookieSession = require('cookie-session');
-const dbConfig = require('../ormconfig.js');
+// const dbConfig = require('../ormconfig.js');
+const { dataSourceOptions } = require('../db/data-source');
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ const dbConfig = require('../ormconfig.js');
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
-    TypeOrmModule.forRoot(dbConfig),
+    TypeOrmModule.forRoot(dataSourceOptions),
     // TypeOrmModule.forRootAsync({
     //   inject: [ConfigService],
     //   useFactory: (config: ConfigService) => {
