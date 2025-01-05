@@ -1,9 +1,8 @@
-import { error } from 'console';
 import { rm } from 'fs/promises';
 import { join } from 'path';
 
 global.beforeEach(async () => {
   try {
-    await rm(join(__dirname, '..', 'test.sqlite'));
+    await rm(join(__dirname, '..', 'test-db.sqlite'));
   } catch (e) {}
 });
