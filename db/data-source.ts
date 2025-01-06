@@ -24,6 +24,12 @@ switch (process.env.NODE_ENV) {
     });
     break;
   case 'production':
+    Object.assign(dbOptions, {
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      entities: ['**/*.entity.js'],
+      migrationsRun: true,
+    });
     break;
   default:
     throw new Error('Unknown environment');
